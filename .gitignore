@@ -1,0 +1,57 @@
+# Operating-system files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.*
+secrets.*
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+tmp/
+
+# Wazuh or endpoint data that may contain sensitive information
+sample-data/raw/
+incident-reports/private/
+screenshots/private/
+
+# Virtual machines and disk images
+*.vdi
+*.vmdk
+*.vhd
+*.vhdx
+*.ova
+*.ovf
+*.iso
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
