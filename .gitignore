@@ -36,6 +36,10 @@ secrets.*
 *.temp
 tmp/
 
+# Local course and session tracking
+COURSE_PROGRESS.md
+SESSION_HANDOFF.md
+
 # Wazuh or endpoint data that may contain sensitive information
 sample-data/raw/
 incident-reports/private/

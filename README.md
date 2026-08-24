@@ -16,16 +16,31 @@ practical experience in:
 
 ## Project Status
 
-**Current phase:** Architecture and environment planning
+**Current phase:** Architecture complete; Wazuh server deployment is next
 
-## Planned Architecture
+## Lab Architecture
 
-The laboratory will contain:
+The laboratory uses VMware Fusion 26 on an Apple Silicon host. All guest
+systems use ARM64 operating-system images.
 
-1. A central Wazuh server
-2. A Windows endpoint monitored with Wazuh and Sysmon
-3. An Ubuntu Linux endpoint monitored with Wazuh
-4. An isolated virtual network for controlled simulations
+| System | Operating system | vCPU | RAM | Disk | Lab IP |
+|---|---|---:|---:|---:|---|
+| Wazuh server | Ubuntu Server 24.04 LTS ARM64 | 4 | 8 GB | 60 GB | `192.168.132.10` |
+| Windows endpoint | Windows 11 ARM64 | 4 | 5 GB | 64 GB | `192.168.132.20` |
+| Linux endpoint | Ubuntu 24.04 LTS ARM64 | 2 | 2 GB | 40 GB | `192.168.132.30` |
+
+The Wazuh server will use an all-in-one deployment containing the manager,
+indexer, and dashboard.
+
+## Network Isolation
+
+- VMware `vmnet1` provides the private host-only lab network at
+  `192.168.132.0/24`.
+- Static lab addresses are outside VMware's DHCP pool.
+- NAT is used temporarily for trusted updates and package installation.
+- Bridged networking is not used.
+- NAT can be disconnected during controlled simulations that do not require
+  internet access.
 
 ## Project Objectives
 
@@ -43,7 +58,7 @@ The laboratory will contain:
 - [x] Initial objectives
 - [x] Safety boundaries
 - [x] Initial data-flow documentation
-- [ ] Virtual laboratory architecture
+- [x] Virtual laboratory architecture
 - [ ] Wazuh server deployment
 - [ ] Windows endpoint deployment
 - [ ] Linux endpoint deployment
@@ -54,6 +69,22 @@ The laboratory will contain:
 - [ ] Python alert-processing utility
 - [ ] Three incident reports
 - [ ] Final demonstration video
+
+## Architecture Documentation
+
+- [Data flow](architecture/data-flow.md)
+- [Network plan](architecture/network-plan.md)
+- [Resource plan](architecture/resource-plan.md)
+- [Snapshot plan](architecture/snapshot-plan.md)
+- [Host specifications](docs/host-specifications.md)
+- [Safety boundaries](docs/safety-boundaries.md)
+
+## Current Milestone
+
+The host capabilities, hypervisor, ARM64 guest architecture, VM resource
+allocations, isolated network, static address plan, and snapshot strategy have
+been documented. The next implementation milestone is deploying the
+`soc-wazuh` Ubuntu Server VM and validating access to the Wazuh dashboard.
 
 ## Repository Structure
 
