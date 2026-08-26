@@ -2,8 +2,10 @@
 
 ## Wazuh Server
 
-- `01-clean-os`
-- `02-wazuh-installed`
+- [x] `01-clean-os` — updated Ubuntu ARM64 baseline with validated SSH and
+  networking, before Wazuh installation
+- [x] `02-wazuh-installed` — verified Wazuh manager, indexer, dashboard,
+  Filebeat, ports, and Mac dashboard access
 - `03-agents-connected`
 - `04-before-custom-rules`
 

@@ -16,7 +16,8 @@ practical experience in:
 
 ## Project Status
 
-**Current phase:** Architecture complete; Wazuh server deployment is next
+**Current phase:** Wazuh central server deployed and validated; endpoint
+deployment is next
 
 ## Lab Architecture
 
@@ -29,8 +30,9 @@ systems use ARM64 operating-system images.
 | Windows endpoint | Windows 11 ARM64 | 4 | 5 GB | 64 GB | `192.168.132.20` |
 | Linux endpoint | Ubuntu 24.04 LTS ARM64 | 2 | 2 GB | 40 GB | `192.168.132.30` |
 
-The Wazuh server will use an all-in-one deployment containing the manager,
-indexer, and dashboard.
+The Wazuh server uses an all-in-one deployment containing the manager, indexer,
+and dashboard. It is reachable from the Mac host at
+`https://192.168.132.10` on the private lab network.
 
 ## Network Isolation
 
@@ -59,7 +61,7 @@ indexer, and dashboard.
 - [x] Safety boundaries
 - [x] Initial data-flow documentation
 - [x] Virtual laboratory architecture
-- [ ] Wazuh server deployment
+- [x] Wazuh server deployment
 - [ ] Windows endpoint deployment
 - [ ] Linux endpoint deployment
 - [ ] Sysmon configuration
@@ -77,14 +79,20 @@ indexer, and dashboard.
 - [Resource plan](architecture/resource-plan.md)
 - [Snapshot plan](architecture/snapshot-plan.md)
 - [Host specifications](docs/host-specifications.md)
+- [Wazuh server deployment](docs/wazuh-server-deployment.md)
 - [Safety boundaries](docs/safety-boundaries.md)
 
 ## Current Milestone
 
-The host capabilities, hypervisor, ARM64 guest architecture, VM resource
-allocations, isolated network, static address plan, and snapshot strategy have
-been documented. The next implementation milestone is deploying the
-`soc-wazuh` Ubuntu Server VM and validating access to the Wazuh dashboard.
+The `soc-wazuh` Ubuntu Server VM has been deployed on ARM64 with separate NAT
+and host-only adapters. Its permanent lab address, SSH access, Wazuh central
+services, listening ports, and dashboard access from the Mac host have been
+validated. Clean-OS and post-installation rollback snapshots preserve both
+baseline states.
+
+The next implementation milestone is deploying the Windows 11 ARM64 endpoint,
+installing its Wazuh agent, and confirming that Windows telemetry reaches the
+central server.
 
 ## Repository Structure
 

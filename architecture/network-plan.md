@@ -33,7 +33,7 @@ access is not required.
 - Host address: `192.168.132.1`
 - Purpose: agent communication, administration, and dashboard access
 - Hypervisor: VMware Fusion 26.0.0
-- Verification status: Verified on the host
+- Verification status: Implemented and verified on the host and Wazuh VM
 - DHCP range: `192.168.132.128` through `192.168.132.254`
 
 The Ubuntu ARM64 ISO supplies the guest operating-system installer. It does
@@ -56,6 +56,10 @@ network. The static addresses below are outside its DHCP pool.
 - Adapter 1: NAT
 - Adapter 2: Host-only
 - Static host-only address: `192.168.132.10`
+- Ubuntu interface `enp2s0`: NAT with DHCP
+- Ubuntu interface `enp10s0`: static `192.168.132.10/24`
+- Default route: NAT gateway on `enp2s0`
+- Validation: host reachability, DNS, HTTPS, and SSH passed
 
 ### Windows Endpoint
 

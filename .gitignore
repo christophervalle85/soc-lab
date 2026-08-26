@@ -44,6 +44,7 @@ SESSION_HANDOFF.md
 sample-data/raw/
 incident-reports/private/
 screenshots/private/
+wazuh-install-files.tar
 
 # Virtual machines and disk images
 *.vdi
@@ -53,6 +54,7 @@ screenshots/private/
 *.ova
 *.ovf
 *.iso
+*.vmwarevm/
 
 # Terraform
 .terraform/
