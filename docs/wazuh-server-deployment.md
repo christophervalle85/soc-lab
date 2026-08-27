@@ -11,6 +11,13 @@ This all-in-one design keeps the initial laboratory small enough for a personal
 workstation while preserving the same collection, analysis, indexing, and
 investigation workflow used in larger deployments.
 
+## Dashboard Evidence
+
+![Initial Wazuh dashboard baseline](../screenshots/lesson-03-wazuh-dashboard-baseline.png)
+
+*Initial Wazuh dashboard after validating the ARM64 all-in-one deployment. No
+endpoint agents had been enrolled at this checkpoint.*
+
 ## Platform
 
 | Item | Implemented configuration |
