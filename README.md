@@ -16,8 +16,8 @@ practical experience in:
 
 ## Project Status
 
-**Current phase:** Wazuh central server deployed and validated; endpoint
-deployment is next
+**Current phase:** Windows endpoint, Sysmon telemetry, and Wazuh agent
+integration validated; Lesson 4 documentation is ready for review
 
 ## Lab Architecture
 
@@ -62,9 +62,9 @@ and dashboard. It is reachable from the Mac host at
 - [x] Initial data-flow documentation
 - [x] Virtual laboratory architecture
 - [x] Wazuh server deployment
-- [ ] Windows endpoint deployment
+- [x] Windows endpoint deployment
 - [ ] Linux endpoint deployment
-- [ ] Sysmon configuration
+- [x] Sysmon configuration
 - [ ] Custom Wazuh rules
 - [ ] Sigma detection rules
 - [ ] Controlled attack simulations
@@ -80,19 +80,23 @@ and dashboard. It is reachable from the Mac host at
 - [Snapshot plan](architecture/snapshot-plan.md)
 - [Host specifications](docs/host-specifications.md)
 - [Wazuh server deployment](docs/wazuh-server-deployment.md)
+- [Windows endpoint deployment and validation](docs/windows-endpoint-deployment.md)
 - [Safety boundaries](docs/safety-boundaries.md)
 
 ## Current Milestone
 
-The `soc-wazuh` Ubuntu Server VM has been deployed on ARM64 with separate NAT
-and host-only adapters. Its permanent lab address, SSH access, Wazuh central
-services, listening ports, and dashboard access from the Mac host have been
-validated. Clean-OS and post-installation rollback snapshots preserve both
-baseline states.
+The `soc-wazuh` ARM64 server is operational, and the Windows 11 ARM64 endpoint
+`SOC-WIN11` is enrolled as Wazuh agent `001`. Sysmon process and file telemetry
+was validated locally and through Wazuh Threat Hunting. A benign marker test
+produced an alert containing the endpoint identity, command line, parent
+process, integrity level, and executable hash.
 
-The next implementation milestone is deploying the Windows 11 ARM64 endpoint,
-installing its Wazuh agent, and confirming that Windows telemetry reaches the
-central server.
+![Validated Sysmon event from SOC-WIN11](screenshots/lesson-04-wazuh-sysmon-event-validation.png)
+
+The powered-off `03-wazuh-agent-installed` VMware snapshot preserves the
+validated endpoint state. The remaining Lesson 4 checkpoint is the reviewed
+Git commit; the next implementation milestone is deploying the Ubuntu
+endpoint.
 
 ## Repository Structure
 

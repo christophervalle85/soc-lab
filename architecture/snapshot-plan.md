@@ -11,11 +11,13 @@
 
 ## Windows Endpoint
 
-- `01-clean-windows`
-- `02-updated`
-- `03-wazuh-agent-installed`
-- `04-sysmon-installed`
-- `05-before-simulation`
+- [x] `01-clean-windows` — updated Windows 11 ARM64 baseline with VMware Tools,
+  SSH, both network adapters, internet access, and Wazuh reachability validated
+- [x] `02-sysmon-installed` — Sysmon 15.21 ARM64 service, driver,
+  configuration, and Operational event logging validated
+- [x] `03-wazuh-agent-installed` — enrolled Wazuh agent, Sysmon event-channel
+  collection, active dashboard status, and end-to-end telemetry validated
+- `04-before-simulation`
 
 ## Ubuntu Endpoint
 

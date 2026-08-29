@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Mini SOC Lab Sysmon baseline
+
+  Purpose: collect useful Windows endpoint telemetry without enabling every
+  high-volume Sysmon event type. This is a learning-lab baseline, not a
+  production policy.
+-->
+<Sysmon schemaversion="4.90">
+  <HashAlgorithms>SHA256</HashAlgorithms>
+  <CheckRevocation>true</CheckRevocation>
+  <DnsLookup>true</DnsLookup>
+
+  <EventFiltering>
+    <!-- Event ID 1: record all process creation events. -->
+    <ProcessCreate onmatch="exclude" />
+
+    <!-- Event ID 3: record all network connections for lab exercises. -->
+    <NetworkConnect onmatch="exclude" />
+
+    <!-- Event ID 11: focus file creation on commonly investigated paths. -->
+    <FileCreate onmatch="include">
+      <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+      <TargetFilename condition="begin with">C:\ProgramData\</TargetFilename>
+      <TargetFilename condition="begin with">C:\Windows\Temp\</TargetFilename>
+    </FileCreate>
+
+    <!-- Events 12-14: monitor common user and machine persistence keys. -->
+    <RegistryEvent onmatch="include">
+      <TargetObject condition="contains">\CurrentVersion\Run</TargetObject>
+      <TargetObject condition="contains">\CurrentVersion\RunOnce</TargetObject>
+    </RegistryEvent>
+
+    <!-- Event ID 22: record all DNS queries for process/domain correlation. -->
+    <DnsQuery onmatch="exclude" />
+  </EventFiltering>
+</Sysmon>
