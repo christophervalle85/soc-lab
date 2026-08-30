@@ -6,11 +6,11 @@
 |---|---:|---:|---:|
 | Wazuh server | 4 | 8 GB | 60 GB |
 | Windows endpoint | 4 | 5 GB | 64 GB |
-| Ubuntu endpoint | 2 | 2 GB | 40 GB |
+| Ubuntu endpoint | 2 | 3 GB | 40 GB |
 
 ## Estimated Combined Requirements
 
-- Guest RAM: 15 GB when all three VMs are running
+- Guest RAM: 16 GB when all three VMs are running
 - Virtual storage: up to 164 GB using dynamically allocated disks
 - Host operating-system resources must remain available
 

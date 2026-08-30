@@ -21,9 +21,12 @@
 
 ## Ubuntu Endpoint
 
-- `01-clean-ubuntu`
-- `02-updated`
-- `03-wazuh-agent-installed`
+- [x] `01-clean-ubuntu` — fresh Ubuntu 24.04.4 ARM64 installation with static
+  lab networking and key-based SSH validated
+- [x] `02-updated` — current Ubuntu updates applied; post-reboot identity,
+  routing, SSH, DNS, and outbound HTTPS validated
+- [x] `03-wazuh-agent-installed` — Wazuh agent `4.14.7-1` active and
+  controlled SSH authentication telemetry validated as rule `5710`
 - `04-before-simulation`
 
 ## Rules

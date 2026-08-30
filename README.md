@@ -16,8 +16,8 @@ practical experience in:
 
 ## Project Status
 
-**Current phase:** Windows endpoint, Sysmon telemetry, and Wazuh agent
-integration validated; Lesson 4 documentation is ready for review
+**Current phase:** Windows and Ubuntu endpoints are enrolled with Wazuh and
+their endpoint telemetry has been validated; Lesson 5 is ready for Git review
 
 ## Lab Architecture
 
@@ -28,7 +28,7 @@ systems use ARM64 operating-system images.
 |---|---|---:|---:|---:|---|
 | Wazuh server | Ubuntu Server 24.04 LTS ARM64 | 4 | 8 GB | 60 GB | `192.168.132.10` |
 | Windows endpoint | Windows 11 ARM64 | 4 | 5 GB | 64 GB | `192.168.132.20` |
-| Linux endpoint | Ubuntu 24.04 LTS ARM64 | 2 | 2 GB | 40 GB | `192.168.132.30` |
+| Linux endpoint | Ubuntu 24.04 LTS ARM64 | 2 | 3 GB | 40 GB | `192.168.132.30` |
 
 The Wazuh server uses an all-in-one deployment containing the manager, indexer,
 and dashboard. It is reachable from the Mac host at
@@ -63,7 +63,7 @@ and dashboard. It is reachable from the Mac host at
 - [x] Virtual laboratory architecture
 - [x] Wazuh server deployment
 - [x] Windows endpoint deployment
-- [ ] Linux endpoint deployment
+- [x] Linux endpoint deployment
 - [x] Sysmon configuration
 - [ ] Custom Wazuh rules
 - [ ] Sigma detection rules
@@ -81,22 +81,23 @@ and dashboard. It is reachable from the Mac host at
 - [Host specifications](docs/host-specifications.md)
 - [Wazuh server deployment](docs/wazuh-server-deployment.md)
 - [Windows endpoint deployment and validation](docs/windows-endpoint-deployment.md)
+- [Linux endpoint deployment and validation](docs/linux-endpoint-deployment.md)
 - [Safety boundaries](docs/safety-boundaries.md)
 
 ## Current Milestone
 
-The `soc-wazuh` ARM64 server is operational, and the Windows 11 ARM64 endpoint
-`SOC-WIN11` is enrolled as Wazuh agent `001`. Sysmon process and file telemetry
-was validated locally and through Wazuh Threat Hunting. A benign marker test
-produced an alert containing the endpoint identity, command line, parent
-process, integrity level, and executable hash.
+The `soc-wazuh` ARM64 server is operational. Windows endpoint `SOC-WIN11`
+(`001`) forwards Sysmon telemetry, and Ubuntu endpoint `SOC-UBUNTU` (`002`)
+forwards Linux system and authentication telemetry. Controlled, benign tests
+were visible in Wazuh Threat Hunting for both endpoints.
 
 ![Validated Sysmon event from SOC-WIN11](screenshots/lesson-04-wazuh-sysmon-event-validation.png)
 
-The powered-off `03-wazuh-agent-installed` VMware snapshot preserves the
-validated endpoint state. The remaining Lesson 4 checkpoint is the reviewed
-Git commit; the next implementation milestone is deploying the Ubuntu
-endpoint.
+![Validated Linux SSH event from SOC-UBUNTU](screenshots/lesson-05-wazuh-linux-ssh-validation.png)
+
+Powered-off `03-wazuh-agent-installed` snapshots preserve both validated
+endpoint states. The remaining Lesson 5 checkpoint is the reviewed Git commit;
+the next milestone is structured log analysis and alert triage.
 
 ## Repository Structure
 

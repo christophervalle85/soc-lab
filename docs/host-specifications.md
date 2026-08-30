@@ -53,11 +53,12 @@
 |---|---:|---:|---:|
 | Wazuh server | 4 | 8 GB | 60 GB |
 | Windows 11 endpoint | 4 | 5 GB | 64 GB |
-| Ubuntu endpoint | 2 | 2 GB | 40 GB |
+| Ubuntu endpoint | 2 | 3 GB | 40 GB |
 
-Approximate guest RAM when all systems are running: 15 GB.
+Approximate guest RAM when all systems are running: 16 GB.
 
-This leaves approximately 9 GB of physical memory available to macOS and host applications before considering virtualization overhead.
+This leaves approximately 8 GB of physical memory available to macOS and host
+applications before considering virtualization overhead.
 
 ## Host Suitability
 
