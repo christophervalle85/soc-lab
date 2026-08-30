@@ -16,8 +16,9 @@ practical experience in:
 
 ## Project Status
 
-**Current phase:** Windows and Ubuntu endpoints are enrolled with Wazuh and
-their endpoint telemetry has been validated; Lesson 5 is ready for Git review
+**Current phase:** Lesson 6 alert triage is complete; the validated Ubuntu SSH
+and Windows Sysmon alerts were investigated and classified as benign true
+positives
 
 ## Lab Architecture
 
@@ -65,6 +66,7 @@ and dashboard. It is reachable from the Mac host at
 - [x] Windows endpoint deployment
 - [x] Linux endpoint deployment
 - [x] Sysmon configuration
+- [x] Reusable alert-triage worksheet and two worked cases
 - [ ] Custom Wazuh rules
 - [ ] Sigma detection rules
 - [ ] Controlled attack simulations
@@ -82,6 +84,7 @@ and dashboard. It is reachable from the Mac host at
 - [Wazuh server deployment](docs/wazuh-server-deployment.md)
 - [Windows endpoint deployment and validation](docs/windows-endpoint-deployment.md)
 - [Linux endpoint deployment and validation](docs/linux-endpoint-deployment.md)
+- [Alert triage worksheet](incident-reports/lesson-06-alert-triage-worksheet.md)
 - [Safety boundaries](docs/safety-boundaries.md)
 
 ## Current Milestone
@@ -96,8 +99,12 @@ were visible in Wazuh Threat Hunting for both endpoints.
 ![Validated Linux SSH event from SOC-UBUNTU](screenshots/lesson-05-wazuh-linux-ssh-validation.png)
 
 Powered-off `03-wazuh-agent-installed` snapshots preserve both validated
-endpoint states. The remaining Lesson 5 checkpoint is the reviewed Git commit;
-the next milestone is structured log analysis and alert triage.
+endpoint states. The Linux rule `5710` alert has now been investigated using a
+repeatable triage workflow and classified as a high-confidence benign true
+positive. The same workflow has now been applied to the Windows Sysmon marker
+alert, including parent-child process correlation and surrounding-event
+review. The completed worksheet preserves both investigations and their
+supporting evidence; the next milestone is MITRE ATT&CK mapping.
 
 ## Repository Structure
 
