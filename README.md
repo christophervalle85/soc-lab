@@ -16,9 +16,10 @@ practical experience in:
 
 ## Project Status
 
-**Current phase:** Lesson 6 alert triage is complete; the validated Ubuntu SSH
-and Windows Sysmon alerts were investigated and classified as benign true
-positives
+**Current phase:** Lesson 7 MITRE ATT&CK coverage analysis is in progress. A
+controlled PowerShell test verified local Sysmon process telemetry but did not
+produce a visible Wazuh alert, identifying a detection-rule opportunity for
+Lesson 8.
 
 ## Lab Architecture
 
@@ -67,6 +68,7 @@ and dashboard. It is reachable from the Mac host at
 - [x] Linux endpoint deployment
 - [x] Sysmon configuration
 - [x] Reusable alert-triage worksheet and two worked cases
+- [ ] Evidence-based MITRE ATT&CK coverage matrix and validation evidence
 - [ ] Custom Wazuh rules
 - [ ] Sigma detection rules
 - [ ] Controlled attack simulations
@@ -85,6 +87,7 @@ and dashboard. It is reachable from the Mac host at
 - [Windows endpoint deployment and validation](docs/windows-endpoint-deployment.md)
 - [Linux endpoint deployment and validation](docs/linux-endpoint-deployment.md)
 - [Alert triage worksheet](incident-reports/lesson-06-alert-triage-worksheet.md)
+- [MITRE ATT&CK coverage matrix](docs/mitre-attack-coverage.md)
 - [Safety boundaries](docs/safety-boundaries.md)
 
 ## Current Milestone
@@ -104,7 +107,23 @@ repeatable triage workflow and classified as a high-confidence benign true
 positive. The same workflow has now been applied to the Windows Sysmon marker
 alert, including parent-child process correlation and surrounding-event
 review. The completed worksheet preserves both investigations and their
-supporting evidence; the next milestone is MITRE ATT&CK mapping.
+supporting evidence. Lesson 7 now applies an evidence-based ATT&CK coverage
+matrix to those findings. A standalone benign PowerShell marker was recorded
+locally in Sysmon Event ID 1, but it did not produce a visible Wazuh alert.
+During that review, a separate Wazuh-agent PowerShell process deleting
+temporary `secpol.cfg` was observed triggering Wazuh rule `92021`, level `3`,
+mapped by Wazuh to `T1070.004` File Deletion.
+
+Together, these observations demonstrate an important detection-engineering
+distinction: collecting endpoint activity does not guarantee that an alerting
+rule covers it. The PowerShell marker is therefore a candidate for controlled
+custom-rule development in Lesson 8. Sanitized Sysmon evidence for the marker
+is retained below, and the complete Wazuh alert export is retained as separate
+supporting evidence.
+
+![Validated Lesson 7 PowerShell process event](screenshots/lesson-07-sysmon-powershell-marker.png)
+
+[View the separate Wazuh rule `92021` event export](docs/evidence/lesson-07-wazuh-rule-92021-t1070-004.pdf)
 
 ## Repository Structure
 
@@ -116,6 +135,7 @@ mini-soc-lab/
 │   ├── sigma/
 │   └── wazuh/
 ├── docs/
+│   └── evidence/
 ├── incident-reports/
 ├── sample-data/
 ├── screenshots/
@@ -123,3 +143,4 @@ mini-soc-lab/
 ├── tests/
 ├── .gitignore
 └── README.md
+```
