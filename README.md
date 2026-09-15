@@ -16,10 +16,10 @@ practical experience in:
 
 ## Project Status
 
-**Current phase:** Lesson 7 MITRE ATT&CK coverage analysis is in progress. A
-controlled PowerShell test verified local Sysmon process telemetry but did not
-produce a visible Wazuh alert, identifying a detection-rule opportunity for
-Lesson 8.
+**Current phase:** Lesson 8 custom Wazuh rule validation is complete. The
+Lesson 7 PowerShell telemetry gap was converted into bounded custom rule
+`100100`; its expected-match test produced a live alert, while a documented
+control event produced no matching custom-rule alert.
 
 ## Lab Architecture
 
@@ -68,8 +68,8 @@ and dashboard. It is reachable from the Mac host at
 - [x] Linux endpoint deployment
 - [x] Sysmon configuration
 - [x] Reusable alert-triage worksheet and two worked cases
-- [ ] Evidence-based MITRE ATT&CK coverage matrix and validation evidence
-- [ ] Custom Wazuh rules
+- [x] Evidence-based MITRE ATT&CK coverage matrix and validation evidence
+- [x] Custom Wazuh rules
 - [ ] Sigma detection rules
 - [ ] Controlled attack simulations
 - [ ] Python alert-processing utility
@@ -88,6 +88,7 @@ and dashboard. It is reachable from the Mac host at
 - [Linux endpoint deployment and validation](docs/linux-endpoint-deployment.md)
 - [Alert triage worksheet](incident-reports/lesson-06-alert-triage-worksheet.md)
 - [MITRE ATT&CK coverage matrix](docs/mitre-attack-coverage.md)
+- [Custom Wazuh rule development and validation](docs/custom-wazuh-rule-development.md)
 - [Safety boundaries](docs/safety-boundaries.md)
 
 ## Current Milestone
@@ -116,14 +117,24 @@ mapped by Wazuh to `T1070.004` File Deletion.
 
 Together, these observations demonstrate an important detection-engineering
 distinction: collecting endpoint activity does not guarantee that an alerting
-rule covers it. The PowerShell marker is therefore a candidate for controlled
-custom-rule development in Lesson 8. Sanitized Sysmon evidence for the marker
-is retained below, and the complete Wazuh alert export is retained as separate
-supporting evidence.
+rule covers it. Lesson 8 addresses that verified gap with custom Wazuh rule
+`100100`, which matches a deliberately unique PowerShell validation marker and
+maps the resulting alert to `T1059.001`. The expected-match test produced a
+live level `5` alert from `SOC-WIN11`. A separate PowerShell control event was
+recorded by local Sysmon but produced no rule `100100` alert in the bounded
+Wazuh search window.
+
+Sanitized Sysmon evidence for the Lesson 7 marker is retained below. Separate
+PDF exports preserve the unrelated rule `92021` observation and the Lesson 8
+rule `100100` positive-match result.
 
 ![Validated Lesson 7 PowerShell process event](screenshots/lesson-07-sysmon-powershell-marker.png)
 
 [View the separate Wazuh rule `92021` event export](docs/evidence/lesson-07-wazuh-rule-92021-t1070-004.pdf)
+
+[View the Lesson 8 rule `100100` positive-match export](docs/evidence/lesson-08-wazuh-rule-100100-t1059-001-positive-match.pdf)
+
+[View the Lesson 8 negative-control result](screenshots/lesson-08-wazuh-rule-100100-negative-control-no-alert.png)
 
 ## Repository Structure
 

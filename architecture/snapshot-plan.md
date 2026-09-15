@@ -6,8 +6,10 @@
   networking, before Wazuh installation
 - [x] `02-wazuh-installed` — verified Wazuh manager, indexer, dashboard,
   Filebeat, ports, and Mac dashboard access
-- `03-agents-connected`
-- `04-before-custom-rules`
+- [x] `03-before-custom-rules` — powered-off Wazuh server checkpoint created
+  after endpoint enrollment and before Lesson 8 custom-rule changes
+- [x] `04-custom-rule-validated` — powered-off Wazuh server checkpoint created
+  after rule `100100`, positive-match, and expected-nonmatch validation
 
 ## Windows Endpoint
 
