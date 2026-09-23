@@ -1,0 +1,6 @@
+{
+  "Image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+  "CommandLine": "powershell.exe -NoProfile -NonInteractive -Command \"Write-Output 'SOC-LAB-LESSON8-T1059-001'\"",
+  "ParentImage": "C:\\Windows\\System32\\cmd.exe",
+  "User": "SOC-WIN11\\socadmin"
+}

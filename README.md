@@ -16,10 +16,10 @@ practical experience in:
 
 ## Project Status
 
-**Current phase:** Lesson 8 custom Wazuh rule validation is complete. The
-Lesson 7 PowerShell telemetry gap was converted into bounded custom rule
-`100100`; its expected-match test produced a live alert, while a documented
-control event produced no matching custom-rule alert.
+**Current phase:** Lesson 9 Sigma detection engineering is complete. The
+verified Lesson 8 PowerShell logic now exists as a portable Sigma rule that
+passed official validation, OpenSearch translation, and repeatable
+expected-match and expected-nonmatch fixture tests.
 
 ## Lab Architecture
 
@@ -70,7 +70,7 @@ and dashboard. It is reachable from the Mac host at
 - [x] Reusable alert-triage worksheet and two worked cases
 - [x] Evidence-based MITRE ATT&CK coverage matrix and validation evidence
 - [x] Custom Wazuh rules
-- [ ] Sigma detection rules
+- [x] Portable Sigma detection rule with repeatable fixture tests
 - [ ] Controlled attack simulations
 - [ ] Python alert-processing utility
 - [ ] Three incident reports
@@ -89,6 +89,7 @@ and dashboard. It is reachable from the Mac host at
 - [Alert triage worksheet](incident-reports/lesson-06-alert-triage-worksheet.md)
 - [MITRE ATT&CK coverage matrix](docs/mitre-attack-coverage.md)
 - [Custom Wazuh rule development and validation](docs/custom-wazuh-rule-development.md)
+- [Sigma detection engineering and validation](docs/sigma-detection-engineering.md)
 - [Safety boundaries](docs/safety-boundaries.md)
 
 ## Current Milestone
@@ -123,6 +124,14 @@ maps the resulting alert to `T1059.001`. The expected-match test produced a
 live level `5` alert from `SOC-WIN11`. A separate PowerShell control event was
 recorded by local Sysmon but produced no rule `100100` alert in the bounded
 Wazuh search window.
+
+Lesson 9 expresses that same bounded detection in portable Sigma YAML. Sigma
+CLI validation returned zero errors or issues. The rule was translated into
+OpenSearch Lucene syntax through an ECS Windows field-mapping pipeline, then
+compiled through the SQLite backend and evaluated against sanitized positive
+and negative JSON fixtures. The expected marker matched and the control marker
+did not. The documentation distinguishes portable conversion from native Wazuh
+deployment and records the required field-mapping limitations.
 
 Sanitized Sysmon evidence for the Lesson 7 marker is retained below. Separate
 PDF exports preserve the unrelated rule `92021` observation and the Lesson 8

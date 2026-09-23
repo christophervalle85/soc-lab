@@ -1,0 +1,27 @@
+title: Controlled PowerShell Lab Validation Marker
+id: 388f6589-290c-48be-89e3-ecf2f7aca571
+status: experimental
+description: >
+    Detects the controlled Mini SOC Lab PowerShell validation marker in Windows
+    process-creation telemetry.
+author: Christopher Valle
+date: 2026-09-15
+tags:
+    - attack.execution
+    - attack.t1059.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        Image|endswith: '\powershell.exe'
+        CommandLine|contains: 'SOC-LAB-LESSON8-T1059-001'
+    condition: selection
+fields:
+    - Image
+    - CommandLine
+    - ParentImage
+    - User
+falsepositives:
+    - Authorized Mini SOC Lab validation activity using the same marker
+level: low
