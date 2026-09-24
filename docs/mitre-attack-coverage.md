@@ -39,6 +39,7 @@ triage record.
 | Lateral Movement | [T1021.004 — Remote Services: SSH](https://attack.mitre.org/techniques/T1021/004/) | Linux | Ubuntu `journald`/`sshd`; Wazuh rule `5710` | Wazuh alert | Telemetry available | The event proves visibility into an SSH connection attempt. It did not use a valid account, establish a session, or move between compromised systems, so lateral movement was not validated. |
 | Execution | [T1059.003 — Command and Scripting Interpreter: Windows Command Shell](https://attack.mitre.org/techniques/T1059/003/) | Windows | Sysmon process telemetry; Wazuh `Suspicious Windows cmd shell execution` alert | Analyst mapping from retained process evidence | Behavior validated | The retained event shows `cmd.exe` launching the documented `wevtutil.exe` and `findstr.exe` validation sequence. This validates command-shell telemetry and detection, not malicious intent. |
 | Execution | [T1059.001 — Command and Scripting Interpreter: PowerShell](https://attack.mitre.org/techniques/T1059/001/) | Windows | Sysmon Event ID 1 process telemetry; custom Wazuh rule `100100`, level `5` | Analyst mapping encoded in a controlled custom rule | Behavior validated | Lesson 7 Sysmon record `5154` proved endpoint telemetry but produced no visible alert. After rule `100100` was added in Lesson 8, the exact marker `SOC-LAB-LESSON8-T1059-001` generated Sysmon record `65220` and a live Wazuh alert on 2026-09-15 at 14:24:49.697 dashboard time. Control record `65365` used a different marker and produced no rule `100100` alert in a bounded Wazuh search. The retained evidence validates controlled PowerShell execution and both expected-match and expected-nonmatch paths. |
+| Persistence, Privilege Escalation | [T1547.001 — Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder](https://attack.mitre.org/techniques/T1547/001/) | Windows | Sysmon Event ID 13 Registry telemetry; native Wazuh rule `92302`, level `6` | Wazuh alert corroborated by analyst-controlled simulation | Behavior validated | Lesson 10 created one temporary current-user `Run` value named `SocLabLesson10` with a harmless marker command. Sysmon record `101507` captured the `SetValue` operation from `reg.exe`, and Wazuh generated rule `92302` with the expected `T1547.001` mapping. Cleanup verification proved that the value was removed and the marker file was not created. |
 | Defense Evasion | [T1070.004 — Indicator Removal: File Deletion](https://attack.mitre.org/techniques/T1070/004/) | Windows | Sysmon process telemetry; Wazuh rule `92021`, level `3` | Wazuh alert | Detection observed | Wazuh recorded the separate event on 2026-09-02 at 12:59:53.122 in the dashboard (Sysmon record `8222`). The Wazuh-agent parent launched PowerShell and removed its temporary `secpol.cfg` file, satisfying the vendor mapping. This was benign agent maintenance, not the Lesson 7 marker, and it does not establish detection coverage for `T1059.001`. |
 
 ## Lesson 7 Detection-Coverage Finding
@@ -74,6 +75,23 @@ image with a different marker. Sysmon record `65365` proves that the control
 event occurred, while the bounded Wazuh search returned no rule `100100`
 results. Together, these tests validate the intended narrow matching behavior.
 
+## Lesson 10 Controlled Persistence Validation
+
+The authorized Lesson 10 simulation created a temporary value named
+`SocLabLesson10` under the current user's Registry Run key. The value contained
+the deterministic marker `SOC-LAB-LESSON10-T1547-001` and a harmless command
+that would have created a text file only after a future logon. No logoff or
+restart occurred during the test.
+
+Sysmon Event ID `13`, record `101507`, captured `reg.exe` setting the value.
+Wazuh rule `92302`, level `6`, generated an alert carrying the vendor mapping
+`T1547.001`. Unlike earlier entries where the available evidence supported only
+telemetry or a vendor tag, this controlled procedure reproduced the Registry
+Run key behavior itself. The value was then deleted; a subsequent Registry
+query returned not found, and a filesystem check confirmed that the marker
+file did not exist. The coverage state is therefore **Behavior validated** for
+this bounded variation.
+
 ## Evidence Register
 
 | Evidence | Supports |
@@ -88,6 +106,8 @@ results. Together, these tests validate the intended narrow matching behavior.
 | [`lesson-08-wazuh-rule-100100-t1059-001-positive-match.pdf`](evidence/lesson-08-wazuh-rule-100100-t1059-001-positive-match.pdf) | Wazuh agent `001`, `SOC-WIN11`, exact Lesson 8 marker, Sysmon Event ID 1 record `65220`, `cmd.exe` parent, rule `100100`, level `5`, and analyst mapping `T1059.001` |
 | [`lesson-08-sysmon-control-event-id-1.png`](../screenshots/lesson-08-sysmon-control-event-id-1.png) | Local Sysmon Event ID 1 record `65365`, the nonmatching marker `SOC-LAB-LESSON8-CONTROL-001`, PowerShell image and command line, and `cmd.exe` parent |
 | [`lesson-08-wazuh-rule-100100-negative-control-no-alert.png`](../screenshots/lesson-08-wazuh-rule-100100-negative-control-no-alert.png) | Bounded Wazuh Threat Hunting query for agent `001` and rule `100100` returning no results during the control-test window |
+| [`lesson-10-wazuh-rule-92302-t1547-001-registry-run-alert.pdf`](evidence/lesson-10-wazuh-rule-92302-t1547-001-registry-run-alert.pdf) | `SOC-WIN11`, Sysmon Event ID `13` record `101507`, `reg.exe`, the `SocLabLesson10` Run value, marker command, native Wazuh rule `92302`, level `6`, and vendor mapping `T1547.001` |
+| [`lesson-10-registry-run-key-simulation.md`](../simulations/lesson-10-registry-run-key-simulation.md) | Authorized simulation scope, execution procedure, detection result, limitations, and verified Registry and filesystem cleanup |
 
 The Lesson 7 PowerShell Event ID 1 now has sanitized public screenshot evidence.
 The separate rule `92021` observation is retained as a three-page PDF export so
@@ -118,8 +138,8 @@ Future entries must follow these rules:
   threshold, account-lockout protections, and cleanup procedure.
 - Extend PowerShell coverage beyond the deterministic lab marker only after
   defining additional behaviors, test cases, and false-positive boundaries.
-- Validate Windows or Linux persistence telemetry with an authorized,
-  reversible simulation.
+- Extend persistence coverage to another bounded Windows or Linux mechanism
+  only after defining its safety boundaries and cleanup checks.
 - Record ATT&CK version or access date when the matrix is finalized because
   technique definitions and detection guidance evolve.
 
@@ -131,6 +151,7 @@ Future entries must follow these rules:
 - [T1059.003 — Windows Command Shell](https://attack.mitre.org/techniques/T1059/003/)
 - [T1059.001 — PowerShell](https://attack.mitre.org/techniques/T1059/001/)
 - [T1070.004 — File Deletion](https://attack.mitre.org/techniques/T1070/004/)
+- [T1547.001 — Registry Run Keys / Startup Folder](https://attack.mitre.org/techniques/T1547/001/)
 
 Technique names and descriptions were reviewed against the live official
 ATT&CK pages on 2026-09-10.

@@ -16,10 +16,11 @@ practical experience in:
 
 ## Project Status
 
-**Current phase:** Lesson 9 Sigma detection engineering is complete. The
-verified Lesson 8 PowerShell logic now exists as a portable Sigma rule that
-passed official validation, OpenSearch translation, and repeatable
-expected-match and expected-nonmatch fixture tests.
+**Current phase:** Lesson 10 controlled attack simulation is complete. A safe,
+reversible Registry Run key modification on `SOC-WIN11` produced Sysmon Event
+ID `13` and a native Wazuh rule `92302` alert mapped to `T1547.001`. Cleanup
+checks confirmed that the Registry value was removed and its stored marker
+command never created a file.
 
 ## Lab Architecture
 
@@ -71,7 +72,7 @@ and dashboard. It is reachable from the Mac host at
 - [x] Evidence-based MITRE ATT&CK coverage matrix and validation evidence
 - [x] Custom Wazuh rules
 - [x] Portable Sigma detection rule with repeatable fixture tests
-- [ ] Controlled attack simulations
+- [x] Controlled attack simulation
 - [ ] Python alert-processing utility
 - [ ] Three incident reports
 - [ ] Final demonstration video
@@ -90,6 +91,7 @@ and dashboard. It is reachable from the Mac host at
 - [MITRE ATT&CK coverage matrix](docs/mitre-attack-coverage.md)
 - [Custom Wazuh rule development and validation](docs/custom-wazuh-rule-development.md)
 - [Sigma detection engineering and validation](docs/sigma-detection-engineering.md)
+- [Controlled Registry Run key simulation](simulations/lesson-10-registry-run-key-simulation.md)
 - [Safety boundaries](docs/safety-boundaries.md)
 
 ## Current Milestone
@@ -133,6 +135,12 @@ and negative JSON fixtures. The expected marker matched and the control marker
 did not. The documentation distinguishes portable conversion from native Wazuh
 deployment and records the required field-mapping limitations.
 
+Lesson 10 applies the same evidence-first approach to a controlled persistence
+simulation. A temporary current-user Registry Run value generated Sysmon Event
+ID `13`; native Wazuh rule `92302`, level `6`, alerted and mapped the behavior
+to `T1547.001`. The value was removed after validation, and a separate
+filesystem check confirmed that its stored marker command never executed.
+
 Sanitized Sysmon evidence for the Lesson 7 marker is retained below. Separate
 PDF exports preserve the unrelated rule `92021` observation and the Lesson 8
 rule `100100` positive-match result.
@@ -144,6 +152,10 @@ rule `100100` positive-match result.
 [View the Lesson 8 rule `100100` positive-match export](docs/evidence/lesson-08-wazuh-rule-100100-t1059-001-positive-match.pdf)
 
 [View the Lesson 8 negative-control result](screenshots/lesson-08-wazuh-rule-100100-negative-control-no-alert.png)
+
+[View the Lesson 10 Registry Run key simulation report](simulations/lesson-10-registry-run-key-simulation.md)
+
+[View the Lesson 10 Wazuh rule `92302` alert export](docs/evidence/lesson-10-wazuh-rule-92302-t1547-001-registry-run-alert.pdf)
 
 ## Repository Structure
 
