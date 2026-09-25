@@ -1,0 +1,32 @@
+Lesson 11 sanitized Sysmon evidence excerpt
+===========================================
+
+Source: Microsoft-Windows-Sysmon/Operational on SOC-WIN11
+Collection method: Local Get-WinEvent query bounded to 2026-09-23 23:58:20-23:58:45
+Purpose: Identify the process that created the file in Wazuh rule 92213
+
+TimeCreated: 2026-09-23 23:58:32 CDT
+UtcTime: 2026-09-24 04:58:32.062 UTC
+EventId: 1
+RecordId: 101530
+ProcessGuid: {df1231d0-adf8-6ab4-4301-000000001000}
+ProcessId: 4500
+Image: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+CommandLine: powershell.exe -NoProfile -Command "Get-WinEvent -FilterHashtable @{LogName='Microsoft-Windows-Sysmon/Operational'; Id=13; StartTime=(Get-Date).AddMinutes(-15)} | Where-Object { $_.Message -match 'SocLabLesson10|SOC-LAB-LESSON10-T1547-001' } | Select-Object -First 5 TimeCreated, Id, RecordId, Message | Format-List"
+CurrentDirectory: C:\Users\socadmin\
+User: SOC-WIN11\socadmin
+IntegrityLevel: High
+ParentProcessGuid: {df1231d0-ad52-6ab4-3c01-000000001000}
+ParentProcessId: 5772
+ParentImage: C:\Windows\System32\cmd.exe
+ParentCommandLine: c:\windows\system32\cmd.exe
+ParentUser: SOC-WIN11\socadmin
+
+Correlation note
+----------------
+
+Wazuh rule 92213 contains Sysmon Event ID 11, record 101531, at
+2026-09-24 04:58:32.194 UTC. It has the same PID and process GUID as this
+process-creation event. The file event followed process creation by 0.132
+seconds, linking the temporary PowerShell file to this authorized evidence
+query.

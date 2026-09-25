@@ -1,0 +1,35 @@
+{
+  "evidence_type": "sanitized_wazuh_alert_excerpt",
+  "source": "User-exported Wazuh alert JSON",
+  "sanitization_note": "Nonessential index, compliance, and transport metadata were omitted. Investigatively relevant values are unchanged.",
+  "agent": {
+    "id": "001",
+    "name": "SOC-WIN11"
+  },
+  "manager": "soc-wazuh",
+  "wazuh_alert": {
+    "timestamp_utc": "2026-09-24T04:57:20.178Z",
+    "rule_id": "92041",
+    "level": 10,
+    "description": "Value added to registry key has Base64-like pattern",
+    "mitre": [
+      "T1027",
+      "T1112"
+    ]
+  },
+  "sysmon_event": {
+    "event_id": 1,
+    "event_record_id": 101505,
+    "utc_time": "2026-09-24 04:57:19.077",
+    "process_guid": "{df1231d0-adaf-6ab4-3e01-000000001000}",
+    "process_id": 2724,
+    "image": "C:\\Windows\\System32\\reg.exe",
+    "command_line": "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" /v SocLabLesson10 /t REG_SZ /d \"cmd.exe /c echo SOC-LAB-LESSON10-T1547-001 > C:\\Users\\socadmin\\Documents\\soc-lab-lesson10.txt\" /f",
+    "user": "SOC-WIN11\\socadmin",
+    "integrity_level": "High",
+    "parent_process_guid": "{df1231d0-ad52-6ab4-3c01-000000001000}",
+    "parent_process_id": 5772,
+    "parent_image": "C:\\Windows\\System32\\cmd.exe",
+    "parent_command_line": "c:\\windows\\system32\\cmd.exe"
+  }
+}

@@ -16,11 +16,11 @@ practical experience in:
 
 ## Project Status
 
-**Current phase:** Lesson 10 controlled attack simulation is complete. A safe,
-reversible Registry Run key modification on `SOC-WIN11` produced Sysmon Event
-ID `13` and a native Wazuh rule `92302` alert mapped to `T1547.001`. Cleanup
-checks confirmed that the Registry value was removed and its stored marker
-command never created a file.
+**Current phase:** Lesson 11 incident investigation is documented. The first
+professional report reconstructs the Lesson 10 Registry Run-key timeline,
+correlates three Wazuh alerts with their underlying Sysmon events, validates
+their ATT&CK mappings, and closes the case as an authorized simulation with no
+evidence of compromise.
 
 ## Lab Architecture
 
@@ -92,6 +92,7 @@ and dashboard. It is reachable from the Mac host at
 - [Custom Wazuh rule development and validation](docs/custom-wazuh-rule-development.md)
 - [Sigma detection engineering and validation](docs/sigma-detection-engineering.md)
 - [Controlled Registry Run key simulation](simulations/lesson-10-registry-run-key-simulation.md)
+- [Registry Run-key incident investigation](incident-reports/lesson-11-registry-run-key-investigation.md)
 - [Safety boundaries](docs/safety-boundaries.md)
 
 ## Current Milestone
@@ -141,6 +142,13 @@ ID `13`; native Wazuh rule `92302`, level `6`, alerted and mapped the behavior
 to `T1547.001`. The value was removed after validation, and a separate
 filesystem check confirmed that its stored marker command never executed.
 
+Lesson 11 investigates that alert as a bounded SOC case. Process and Registry
+telemetry established that rules `92041` and `92302` were two views of the
+same authorized `reg.exe` command. Process-GUID correlation then traced nearby
+severity-15 rule `92213` to the lab owner's later PowerShell evidence query,
+not an ingress tool transfer. The report documents the timeline, scope,
+ATT&CK validation, cleanup, limitations, and high-confidence disposition.
+
 Sanitized Sysmon evidence for the Lesson 7 marker is retained below. Separate
 PDF exports preserve the unrelated rule `92021` observation and the Lesson 8
 rule `100100` positive-match result.
@@ -156,6 +164,10 @@ rule `100100` positive-match result.
 [View the Lesson 10 Registry Run key simulation report](simulations/lesson-10-registry-run-key-simulation.md)
 
 [View the Lesson 10 Wazuh rule `92302` alert export](docs/evidence/lesson-10-wazuh-rule-92302-t1547-001-registry-run-alert.pdf)
+
+[View the Lesson 11 Registry Run-key incident report](incident-reports/lesson-11-registry-run-key-investigation.md)
+
+[View the Lesson 11 evidence manifest](docs/evidence/lesson-11-evidence-manifest.md)
 
 ## Repository Structure
 

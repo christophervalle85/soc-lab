@@ -1,0 +1,29 @@
+{
+  "evidence_type": "sanitized_wazuh_alert_excerpt",
+  "source": "User-exported Wazuh alert JSON",
+  "sanitization_note": "Nonessential index, compliance, and transport metadata were omitted. Investigatively relevant values are unchanged.",
+  "agent": {
+    "id": "001",
+    "name": "SOC-WIN11"
+  },
+  "manager": "soc-wazuh",
+  "wazuh_alert": {
+    "timestamp_utc": "2026-09-24T04:58:33.183Z",
+    "rule_id": "92213",
+    "level": 15,
+    "description": "Executable file dropped in folder commonly used by malware",
+    "mitre": [
+      "T1105"
+    ]
+  },
+  "sysmon_event": {
+    "event_id": 11,
+    "event_record_id": 101531,
+    "utc_time": "2026-09-24 04:58:32.194",
+    "process_guid": "{df1231d0-adf8-6ab4-4301-000000001000}",
+    "process_id": 4500,
+    "image": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "target_filename": "C:\\Users\\socadmin\\AppData\\Local\\Temp\\__PSScriptPolicyTest_udiwgrly.l3d.ps1",
+    "user": "SOC-WIN11\\socadmin"
+  }
+}
