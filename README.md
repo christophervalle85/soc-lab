@@ -16,11 +16,11 @@ practical experience in:
 
 ## Project Status
 
-**Current phase:** Lesson 11 incident investigation is documented. The first
-professional report reconstructs the Lesson 10 Registry Run-key timeline,
-correlates three Wazuh alerts with their underlying Sysmon events, validates
-their ATT&CK mappings, and closes the case as an authorized simulation with no
-evidence of compromise.
+**Current phase:** Lesson 12 Python security automation is in progress. A
+standard-library command-line utility now processes one or more raw Wazuh JSON
+files or the repository's curated evidence JSON and displays concise alert
+summaries in the terminal. Automated tests cover batch inputs, missing optional
+fields, and partial failures.
 
 ## Lab Architecture
 
@@ -73,7 +73,7 @@ and dashboard. It is reachable from the Mac host at
 - [x] Custom Wazuh rules
 - [x] Portable Sigma detection rule with repeatable fixture tests
 - [x] Controlled attack simulation
-- [ ] Python alert-processing utility
+- [x] Python alert-processing utility
 - [ ] Three incident reports
 - [ ] Final demonstration video
 
@@ -93,6 +93,7 @@ and dashboard. It is reachable from the Mac host at
 - [Sigma detection engineering and validation](docs/sigma-detection-engineering.md)
 - [Controlled Registry Run key simulation](simulations/lesson-10-registry-run-key-simulation.md)
 - [Registry Run-key incident investigation](incident-reports/lesson-11-registry-run-key-investigation.md)
+- [Python Wazuh alert summarization](docs/python-alert-automation.md)
 - [Safety boundaries](docs/safety-boundaries.md)
 
 ## Current Milestone

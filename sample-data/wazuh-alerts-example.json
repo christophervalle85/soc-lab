@@ -1,0 +1,67 @@
+[
+  {
+    "_source": {
+      "timestamp": "2026-09-24T04:57:20.178+0000",
+      "agent": {
+        "id": "001",
+        "name": "SOC-WIN11"
+      },
+      "rule": {
+        "id": "92041",
+        "level": 10,
+        "description": "Value added to registry key has Base64-like pattern",
+        "mitre": {
+          "id": [
+            "T1027",
+            "T1112"
+          ]
+        }
+      },
+      "data": {
+        "win": {
+          "system": {
+            "eventID": "1",
+            "eventRecordID": "101505"
+          },
+          "eventdata": {
+            "image": "C:\\Windows\\System32\\reg.exe",
+            "user": "SOC-WIN11\\socadmin",
+            "commandLine": "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" /v SocLabLesson10 /t REG_SZ /d \"cmd.exe /c echo SOC-LAB-LESSON10-T1547-001\" /f"
+          }
+        }
+      }
+    }
+  },
+  {
+    "_source": {
+      "timestamp": "2026-09-24T04:58:33.183+0000",
+      "agent": {
+        "id": "001",
+        "name": "SOC-WIN11"
+      },
+      "rule": {
+        "id": "92213",
+        "level": 15,
+        "description": "Executable file dropped in folder commonly used by malware",
+        "mitre": {
+          "id": [
+            "T1105"
+          ]
+        }
+      },
+      "data": {
+        "win": {
+          "system": {
+            "eventID": "11",
+            "eventRecordID": "101531"
+          },
+          "eventdata": {
+            "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "user": "SOC-WIN11\\socadmin",
+            "targetFilename": "C:\\Users\\socadmin\\AppData\\Local\\Temp\\__PSScriptPolicyTest_example.ps1"
+          }
+        }
+      }
+    }
+  }
+]
