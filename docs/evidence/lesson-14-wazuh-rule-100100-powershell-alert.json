@@ -1,0 +1,32 @@
+{
+  "evidence_type": "sanitized_wazuh_alert_excerpt",
+  "source": "Owner-provided Wazuh alert JSON",
+  "sanitization_note": "Nonessential index, transport, account SID, and duplicated full_log metadata were omitted. The command line uses the literal > from the Sysmon message rather than the dashboard's HTML-escaped &gt;.",
+  "agent": {
+    "id": "001",
+    "name": "SOC-WIN11"
+  },
+  "manager": "soc-wazuh",
+  "wazuh_alert": {
+    "timestamp_utc": "2026-09-27T03:41:21.174Z",
+    "rule_id": "100100",
+    "level": 5,
+    "description": "Controlled Lesson 8 PowerShell validation marker detected on SOC-WIN11",
+    "mitre": [
+      "T1059.001"
+    ]
+  },
+  "sysmon_event": {
+    "event_id": 1,
+    "event_record_id": 109053,
+    "utc_time": "2026-09-27 03:41:20.069",
+    "process_guid": "{df1231d0-9060-6ab8-9806-000000001000}",
+    "process_id": 6912,
+    "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "command_line": "powershell.exe  -NoProfile -NonInteractive -Command \"Write-Output 'SOC-LAB-LESSON8-T1059-001'; reg.exe add 'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run' /v SocLabCapstone /t REG_SZ /d 'cmd.exe /c echo SOC-LAB-CAPSTONE-001 > C:\\Users\\socadmin\\Documents\\soc-lab-capstone.txt' /f\"",
+    "user": "SOC-WIN11\\socadmin",
+    "parent_process_guid": "{df1231d0-8211-6ab8-8306-000000001000}",
+    "parent_process_id": 3600,
+    "parent_image": "C:\\Windows\\System32\\cmd.exe"
+  }
+}

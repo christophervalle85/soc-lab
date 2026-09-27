@@ -1,0 +1,31 @@
+{
+  "evidence_type": "sanitized_wazuh_alert_excerpt",
+  "source": "Owner-provided Wazuh alert JSON",
+  "sanitization_note": "Nonessential index, transport, and account SID metadata were omitted. The Registry target was normalized from HKU\\<lab-user-SID> to HKCU; the stored command uses the literal > from the Sysmon message rather than the dashboard's HTML-escaped &gt;.",
+  "agent": {
+    "id": "001",
+    "name": "SOC-WIN11"
+  },
+  "manager": "soc-wazuh",
+  "wazuh_alert": {
+    "timestamp_utc": "2026-09-27T03:41:21.217Z",
+    "rule_id": "92302",
+    "level": 6,
+    "description": "Registry entry to be executed on next logon was modified using command line application reg.exe",
+    "mitre": [
+      "T1547.001"
+    ]
+  },
+  "sysmon_event": {
+    "event_id": 13,
+    "event_record_id": 109058,
+    "utc_time": "2026-09-27 03:41:20.414",
+    "event_type": "SetValue",
+    "process_guid": "{df1231d0-9060-6ab8-9906-000000001000}",
+    "process_id": 1816,
+    "image": "C:\\WINDOWS\\system32\\reg.exe",
+    "registry_target_normalized": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\SocLabCapstone",
+    "registry_details": "cmd.exe /c echo SOC-LAB-CAPSTONE-001 > C:\\Users\\socadmin\\Documents\\soc-lab-capstone.txt",
+    "user": "SOC-WIN11\\socadmin"
+  }
+}

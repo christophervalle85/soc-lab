@@ -16,12 +16,20 @@ practical experience in:
 
 ## Project Status
 
-**Current phase:** Lesson 13 detection tuning is complete. Custom Wazuh
-child rule `100110` downgrades the verified benign PowerShell
-`__PSScriptPolicyTest_*.ps1` pattern from level `15` to level `3`. A nearby
-control file still triggered built-in rule `92213` at level `15`, confirming
-that the broader detection remains active. Both temporary validation files
-were removed and verified absent. The Git checkpoint is pending.
+**Current phase:** Lesson 14 capstone evidence investigation. Lessons 1-13 are
+complete. The [capstone case plan](simulations/lesson-14-capstone-plan.md)
+defines a controlled Windows process and Registry sequence, expected evidence,
+cleanup, and the final investigation package. Windows baseline and agent
+checks passed, a pre-simulation snapshot was reported, and the controlled
+command ran once. The planned Run value was confirmed present, then deleted
+and confirmed absent; the marker file was absent at both observed checks.
+Wazuh showed the expected `100100` and `92302` alerts; record-level
+timestamps and curated alert excerpts are preserved. Sysmon process GUIDs
+confirm that PowerShell launched `reg.exe`. The three correlated Sysmon records
+are preserved in a hash-verified native export, with acquisition details in
+the [Lesson 14 evidence manifest](docs/evidence/lesson-14-evidence-manifest.md).
+The [capstone case report](incident-reports/lesson-14-powershell-run-key-capstone.md)
+has been drafted for review; Lesson 14 is not yet a committed Git checkpoint.
 
 ## Lab Architecture
 
@@ -94,8 +102,10 @@ and dashboard. It is reachable from the Mac host at
 - [Sigma detection engineering and validation](docs/sigma-detection-engineering.md)
 - [Controlled Registry Run key simulation](simulations/lesson-10-registry-run-key-simulation.md)
 - [Registry Run-key incident investigation](incident-reports/lesson-11-registry-run-key-investigation.md)
+- [PowerShell and Run-key capstone investigation](incident-reports/lesson-14-powershell-run-key-capstone.md)
 - [Python Wazuh alert summarization](docs/python-alert-automation.md)
 - [Wazuh detection tuning and false-positive validation](docs/detection-tuning-validation.md)
+- [Lesson 14 capstone case plan](simulations/lesson-14-capstone-plan.md)
 - [Safety boundaries](docs/safety-boundaries.md)
 
 ## Current Milestone
