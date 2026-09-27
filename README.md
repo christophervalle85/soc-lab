@@ -16,11 +16,12 @@ practical experience in:
 
 ## Project Status
 
-**Current phase:** Lesson 12 Python security automation is in progress. A
-standard-library command-line utility now processes one or more raw Wazuh JSON
-files or the repository's curated evidence JSON and displays concise alert
-summaries in the terminal. Automated tests cover batch inputs, missing optional
-fields, and partial failures.
+**Current phase:** Lesson 13 detection tuning is complete. Custom Wazuh
+child rule `100110` downgrades the verified benign PowerShell
+`__PSScriptPolicyTest_*.ps1` pattern from level `15` to level `3`. A nearby
+control file still triggered built-in rule `92213` at level `15`, confirming
+that the broader detection remains active. Both temporary validation files
+were removed and verified absent. The Git checkpoint is pending.
 
 ## Lab Architecture
 
@@ -94,6 +95,7 @@ and dashboard. It is reachable from the Mac host at
 - [Controlled Registry Run key simulation](simulations/lesson-10-registry-run-key-simulation.md)
 - [Registry Run-key incident investigation](incident-reports/lesson-11-registry-run-key-investigation.md)
 - [Python Wazuh alert summarization](docs/python-alert-automation.md)
+- [Wazuh detection tuning and false-positive validation](docs/detection-tuning-validation.md)
 - [Safety boundaries](docs/safety-boundaries.md)
 
 ## Current Milestone
@@ -150,6 +152,18 @@ severity-15 rule `92213` to the lab owner's later PowerShell evidence query,
 not an ingress tool transfer. The report documents the timeline, scope,
 ATT&CK validation, cleanup, limitations, and high-confidence disposition.
 
+Lesson 12 adds a standard-library Python CLI that summarizes one or more Wazuh
+JSON alerts into concise terminal output. Seven automated tests cover raw and
+curated evidence, missing optional fields, mixed valid and invalid inputs, and
+file-creation targets.
+
+Lesson 13 tunes the verified rule `92213` false positive without changing the
+built-in Wazuh ruleset. Local child rule `100110` requires the trusted Windows
+PowerShell image and the exact `__PSScriptPolicyTest_*.ps1` Temp-file family,
+then reduces the result to level `3`. Live testing confirmed the known-benign
+pattern matched `100110`, while a differently named `.ps1` control retained
+rule `92213` at level `15`.
+
 Sanitized Sysmon evidence for the Lesson 7 marker is retained below. Separate
 PDF exports preserve the unrelated rule `92021` observation and the Lesson 8
 rule `100100` positive-match result.
@@ -169,6 +183,8 @@ rule `100100` positive-match result.
 [View the Lesson 11 Registry Run-key incident report](incident-reports/lesson-11-registry-run-key-investigation.md)
 
 [View the Lesson 11 evidence manifest](docs/evidence/lesson-11-evidence-manifest.md)
+
+[View the Lesson 13 detection-tuning validation](docs/detection-tuning-validation.md)
 
 ## Repository Structure
 

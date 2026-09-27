@@ -1,0 +1,15 @@
+<!--
+
+  Purpose: reduce the severity of a verified benign PowerShell script-policy
+  test artifact without suppressing unrelated scripts created in user Temp
+  directories. This child rule intentionally preserves a low-severity audit
+  record instead of disabling the built-in rule.
+-->
+<group name="local,sysmon,sysmon_eid11_tuning,windows,">
+  <rule id="100110" level="3">
+    <if_sid>92213</if_sid>
+    <field name="win.eventdata.image" type="pcre2">(?i)^[c-z]:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1\.0\\\\powershell\.exe$</field>
+    <field name="win.eventdata.targetFilename" type="pcre2">(?i)^[c-z]:\\\\Users\\\\[^\\\\]+\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_[^\\\\]+\.ps1$</field>
+    <description>Known PowerShell script-policy test file created in the user Temp directory</description>
+  </rule>
+</group>

@@ -1,0 +1,32 @@
+{
+  "evidence_type": "sanitized_wazuh_alert_excerpt",
+  "source": "User-exported Wazuh alert JSON",
+  "sanitization_note": "Nonessential index, transport, duplicate full-log, and internal-address metadata were omitted. Detection-relevant values are unchanged.",
+  "agent": {
+    "id": "001",
+    "name": "SOC-WIN11"
+  },
+  "manager": "soc-wazuh",
+  "wazuh_alert": {
+    "timestamp_utc": "2026-09-27T02:42:09.072Z",
+    "rule_id": "100110",
+    "level": 3,
+    "description": "Known PowerShell script-policy test file created in the user Temp directory",
+    "groups": [
+      "local",
+      "sysmon",
+      "sysmon_eid11_tuning",
+      "windows"
+    ]
+  },
+  "sysmon_event": {
+    "event_id": 11,
+    "event_record_id": 108914,
+    "utc_time": "2026-09-27 02:42:08.443",
+    "process_guid": "{df1231d0-8275-6ab8-8406-000000001000}",
+    "process_id": 6952,
+    "image": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "target_filename": "C:\\Users\\socadmin\\AppData\\Local\\Temp\\__PSScriptPolicyTest_SOC-LAB-LESSON13.ps1",
+    "user": "SOC-WIN11\\socadmin"
+  }
+}
